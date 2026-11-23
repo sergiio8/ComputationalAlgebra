@@ -1,7 +1,10 @@
 # Nombre: Sergio Martinez Olivera
 # Grupo: DG MAT-INF
 # para esta actividad necesitamos la primera (cuerpos_finitos.py) completa
-import cuerpos_finitos as cf
+if __package__:
+    from . import cuerpos_finitos as cf
+else:
+    import cuerpos_finitos as cf
 import sys
 import time
 
@@ -481,4 +484,3 @@ def fq_fft(fq, g, k, a):
 def fq_ifft(fq, g, k, a):
     n = 2**k
     return tuple(fq.mult(fq.inv_mult(fq.elem_de_tuple((n,))), x) for x in fq_fft(fq, fq.inv_mult(g), k, a))
-

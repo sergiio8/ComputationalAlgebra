@@ -4,7 +4,7 @@ This repository is an **academic algorithms collection / coursework project** fo
 
 ## Contents
 
-### `cuerpos_finitos.py`
+### `src/computational_algebra/cuerpos_finitos.py`
 
 Foundational algebraic structures:
 
@@ -15,7 +15,7 @@ Foundational algebraic structures:
 
 Elements are represented internally as tuples or integers according to the class that creates them. The classes expose conversion and pretty-printing methods so callers do not need to depend on those representations.
 
-### `algoritmos_rapidos.py`
+### `src/computational_algebra/algoritmos_rapidos.py`
 
 Fast and structured algorithms built on the polynomial-ring classes:
 
@@ -27,7 +27,7 @@ Fast and structured algorithms built on the polynomial-ring classes:
 
 Importing this module attaches the fast multiplication and division routines as additional methods on the polynomial-ring classes defined in `cuerpos_finitos.py`.
 
-### `factorizacion.py`
+### `src/computational_algebra/factorizacion.py`
 
 Polynomial factorization routines over prime and extension fields:
 
@@ -41,20 +41,21 @@ This module depends on `cuerpos_finitos.py` and, like the coursework specificati
 
 ## Requirements and setup
 
-The repository contains standalone Python source files and no package metadata or third-party dependency manifest. A Python installation is therefore sufficient for the code currently included; no external dependency is documented or required by the source files.
+The repository contains Python source files and no package metadata or third-party dependency manifest. A Python installation is therefore sufficient for the code currently included; no external dependency is documented or required by the source files.
 
-Clone the repository and run the modules from its root:
+Clone the repository and add its `src` directory to Python's module search path:
 
 ```bash
 git clone https://github.com/sergiio8/ComputationalAlgebra.git
 cd ComputationalAlgebra
+export PYTHONPATH="$PWD/src"
 python
 ```
 
 The modules are intended to be imported by exercises or interactive sessions. For example:
 
 ```python
-import cuerpos_finitos as cf
+from computational_algebra import cuerpos_finitos as cf
 
 fp = cf.cuerpo_fp(5)
 fpx = cf.anillo_fp_x(fp)
@@ -70,12 +71,18 @@ print(fpx.conv_a_str(quotient))
 print(fpx.conv_a_str(remainder))
 ```
 
-To use the faster algorithms, import the module after the foundational classes:
+To use the faster algorithms and factorization routines, import their modules; each registers additional methods on the polynomial-ring classes:
 
 ```python
-import algoritmos_rapidos  # registers fast methods on the polynomial rings
+from computational_algebra import algoritmos_rapidos, factorizacion
 
 fast_product = fpx.mult_fast(f, g)
+```
+
+For exercises that use the original bare module imports (for example, `import cuerpos_finitos as cf`), add the module directory itself to `PYTHONPATH` instead:
+
+```bash
+export PYTHONPATH="$PWD/src/computational_algebra"
 ```
 
 ## Mathematical and implementation notes
