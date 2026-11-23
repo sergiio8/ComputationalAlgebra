@@ -1,0 +1,1 @@
+"""Computational algebra coursework modules."""

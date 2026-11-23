@@ -5,7 +5,10 @@
 # completa, pero quitando las funciones de factorización en anillo_fp_x
 # y en anillo_fq_x, ya que las implementaremos aquí (no se olviden de
 # quitarlas)
-import cuerpos_finitos as cf
+if __package__:
+    from . import cuerpos_finitos as cf
+else:
+    import cuerpos_finitos as cf
 
 # square-free factorization
 # input: fpx --> anillo_fp_x
